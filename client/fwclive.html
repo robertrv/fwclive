@@ -1,0 +1,84 @@
+<head>
+  <title>World fifa cup comments</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<!--<div class="page-header">-->
+    <!--<h1>Live comments <small>Fifa world cup 2014</small></h1>-->
+<!--</div>-->
+
+<header class="navbar" id="header">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">FWC comments</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="active"><a href="#">List</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <ul class="nav pull-right">
+                    {{> loginButtons align="right"}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+	<div name="container-home">
+        <div class="container-fluid">
+			<div class="row-fluid">
+			  <div class="span4">
+			  	  	{{> listMatches}}
+			  </div>
+			  <div class="span6">
+			  		{{> comments}}
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<template name="listMatches">
+	{{#each matches}}
+		{{> match}}
+	{{/each}}
+</template>
+
+<template name="match">
+  <p class="match {{selected}}">
+    <span class="opponents">{{local}} vs {{visitor}}</span>
+    <span class="score">({{localScore}}-{{visitorScore}})</span>
+    <span class="status">{{status}}</span>
+    {{#if isStarted }}
+    <span class="min">TIME: {{time}}</span>
+      <span class="glyphicon glyphicon-search"></span>
+    {{/if}}
+    <span class="badge">{{commentsCount}}</span>
+  </p>
+</template>
+
+<template name="comments">
+    {{#if hasComments }}
+    	{{#each commentsForSelectedMatch}}
+    		{{> comment}}
+		{{/each}}
+	{{else}}
+	  <div>No comments yet</div>
+    {{/if}}
+    {{#if currentUser}}
+    	<textarea id="new-comment" class="form-control" rows="5" cols="20"></textarea>
+    {{/if}}
+</template>
+
+<template name="comment">
+<div class="comment">
+	<span class="label label-default time">{{prettyDate}}</span>
+	<blockquote class="body">{{body}}</blockquote>
+    <em class="owner">By {{userName}}</em>
+</div>
+</template>
