@@ -30,7 +30,7 @@ Template.match.isStarted = function () {
   return this.status == "start";
 };
 Template.match.selected = function () {
-  return Session.equals("selected_match", this._id) ? "selected" : '';
+  return Session.equals("selected_match", this._id) ? "active" : '';
 };
 Template.match.events({
   'click': function () {
@@ -66,6 +66,10 @@ Template.comment.prettyDate = function () {
 	return date.toLocaleDateString() + " " + date.toLocaleTimeString();
 };
 Template.comment.userName = function () {
-
-    return Meteor.call('get_user_name', this.owner);
+  user = Meteor.users.findOne({_id:this.owner});
+  name = user.name;
+  if (name === undefined) {
+    name = user.emails[0].address
+  }
+  return name ;
 }
