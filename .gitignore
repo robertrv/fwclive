@@ -27,3 +27,4 @@ node_modules
 # Stuff related to idea & meteor
 .idea/
 .meteor/local/
+*.iml
