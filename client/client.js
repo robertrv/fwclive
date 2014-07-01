@@ -22,6 +22,11 @@ var okCancelEvents = function (selector, callbacks) {
 
   return events;
 };
+Template.header.events({
+  'dblclick .navbar-brand': function() {
+    Session.set("selected_match", null);
+  }
+})
 
 Template.listMatches.matches = function () {
   return Matches.find({}, {sort: {status: 1}})
@@ -60,7 +65,9 @@ Template.comments.events(okCancelEvents(
       evt.target.value = "";
     }
 }));
-
+Template.comment.isOwner = function () {
+  return Comments.findOne({_id: this._id, owner: Meteor.userId()});
+}
 Template.comment.prettyDate = function () {
 	date = new Date(this.timestamp)
 	return date.toLocaleDateString() + " " + date.toLocaleTimeString();
@@ -73,3 +80,8 @@ Template.comment.userName = function () {
   }
   return name ;
 }
+Template.comment.events({
+  'click #delete': function() {
+    Comments.remove({_id:this._id})
+  }
+})

@@ -5,6 +5,8 @@
 
 <body>
 {{>header}}
+<!-- {{> spinner }}
+ -->
 
 	<div name="container-home">
         <div class="container-fluid">
@@ -31,7 +33,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Results</a>
+      <a class="navbar-brand" href="#">My Results</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -42,11 +44,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <p class="navbar-text navbar-right"><a href="#" class="navbar-link">{{> loginButtons align="right"}}</a></p>
-
-<!--       <ul class="nav navbar-nav navbar-right">
-        <li>{{> loginButtons align="right"}}</li>
-      </ul>
- -->    </div><!-- /.navbar-collapse -->
+   </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
@@ -68,20 +66,10 @@
     <span class="status">{{status}}</span>
     {{#if isStarted }}
     <span class="min">TIME: {{time}}</span>
-      <span class="glyphicon glyphicon-search"></span>
+      <span class="glyphicon glyphicon-bullhorn"></span>
     {{/if}}
     <span class="badge">{{commentsCount}}</span>
   </a>
-  <!--p class="match {{selected}}">
-    <span class="opponents">{{local}} vs {{visitor}}</span>
-    <span class="score">({{localScore}}-{{visitorScore}})</span>
-    <span class="status">{{status}}</span>
-    {{#if isStarted }}
-    <span class="min">TIME: {{time}}</span>
-      <span class="glyphicon glyphicon-search"></span>
-    {{/if}}
-    <span class="badge">{{commentsCount}}</span>
-  </p-->
 </template>
 
 <template name="comments">
@@ -100,7 +88,7 @@
 <template name="comment">
 <div class="comment">
 	<span class="label label-default time">{{prettyDate}}</span> <em class="owner">{{userName}}</em>
-
+  {{# if isOwner }} <a href="#" id="delete"><span class="glyphicon glyphicon-remove"></span></a> {{/if}}
 	<blockquote class="body blockquote-reverse"><small>{{body}}</small></blockquote>
 </div>
 </template>
