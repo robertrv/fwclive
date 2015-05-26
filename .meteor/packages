@@ -8,6 +8,4 @@ autopublish
 insecure
 accounts-password
 accounts-ui
-bootstrap-3
-moment
-spin
+twbs:bootstrap
